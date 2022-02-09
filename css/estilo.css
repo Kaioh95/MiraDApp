@@ -1,0 +1,40 @@
+html{
+    cursor: url("../imagens/reticula.png") 30 30, auto;
+}
+
+body{
+    background: rgba(50,50,50,255);
+}
+
+.alvo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgb(255, 0, 0);
+}
+
+.painel{
+    position: absolute;
+    width: 190px;
+    padding: 10px;
+    left: 0px;
+    bottom: 0px;
+    border-top: solid 1px #fff;
+    background-color: #fff;
+    opacity: 0.7;
+}
+
+.vidas{
+    float: left;   
+}
+
+.coracao{
+    width: 20px;
+    height: 20px;
+}
+
+.cronometro{
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+}
