@@ -2,6 +2,7 @@
 <html>
     <head>
         <title></title>
+        <meta charset="UTF-8"/>
 
         <link rel="icon" href="imagens/logo.png">
         <link rel="stylesheet" href="css/estilo.css" />
@@ -16,16 +17,12 @@
                 <img id="heart2" src="imagens/fullHeart.png" class="coracao"/>
                 <img id="heart1" src="imagens/fullHeart.png" class="coracao"/>
             </div>
-
-            <div class="cronometro"> 
-                Tempo: ?
-            </div>
         </div>
 
         <script>
-            setInterval(function(){
+            var respawnAlvo = setInterval(function(){
                 posicaoRandom()
-            }, 2000)
+            }, 1000)
         </script>
 
     </body>

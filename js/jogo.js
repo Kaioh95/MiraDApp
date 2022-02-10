@@ -18,6 +18,7 @@ function posicaoRandom(){
         document.getElementById('alvoReal').remove()
 
         if(hearts < 1){
+            clearInterval(respawnAlvo)
             alert("Game Over")
             // Game Over
         }
@@ -46,4 +47,8 @@ function posicaoRandom(){
 
     document.body.appendChild(alvo)
     //console.log(eixoX, eixoY, tamanho)
+}
+
+function iniciarJogo(){
+    window.location.replace("app.html");
 }

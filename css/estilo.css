@@ -38,3 +38,19 @@ body{
     font-size: 20px;
     font-weight: bold;
 }
+
+.logoTamanho{
+    width: 120px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.corTexto{
+    text-align: center;
+    color: #fff;
+}
+
+.corCartao{
+    background: rgba(30,31,31,255);
+}
