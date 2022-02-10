@@ -1,6 +1,9 @@
+
+// *** Métodos relacionados ao jogo *** //
 var altura
 var largura
 var hearts = 3
+var hits = 0
 
 function ajustarTamanhoJanelaJogo() {
     altura = window.innerHeight
@@ -17,10 +20,12 @@ function posicaoRandom(){
     if(document.getElementById('alvoReal')){
         document.getElementById('alvoReal').remove()
 
+        // Game Over
         if(hearts < 1){
             clearInterval(respawnAlvo)
-            alert("Game Over")
-            // Game Over
+            alert("Game Over! Hits: " + hits)
+            // chamar função para registrar score
+            window.location.replace("index.html")
         }
         document.getElementById("heart" + hearts).src = "imagens/emptyHeart.png"
         hearts--
@@ -41,8 +46,10 @@ function posicaoRandom(){
     alvo.style.height = tamanho + "px"
     alvo.id = "alvoReal"
     alvo.onclick = function(){
-        this.remove()
         // incrementar score
+        hits += 1
+        document.getElementById("scoreHits").innerHTML = hits
+        this.remove()
     }
 
     document.body.appendChild(alvo)
@@ -50,5 +57,5 @@ function posicaoRandom(){
 }
 
 function iniciarJogo(){
-    window.location.replace("app.html");
+    window.location.replace("app.html")
 }

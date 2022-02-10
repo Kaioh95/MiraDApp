@@ -36,7 +36,7 @@
                     
                     <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
-                        <h5 class="my-0">Minhas Fichas</h5>
+                        <h6 class="my-0">Minhas Fichas</h6>
                         <small class="text-muted" id="endereco">-</small>
                     </div>
 
@@ -78,29 +78,67 @@
                         <span class="text-muted" id="enderecoTop3"></span>
                     </li>
                 </ul>
+                <h5 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Contrato: -</span>
+                    <!--a href="https://ropsten.etherscan.io/address/">" -- "</a-->
+                    <span class="badge badge-secondary badge-pill" id="preco">
+                        Preço da Ficha: -</span>
+                </h5>
                 </div>
             
             </div>
 
-            <div class="row mb-4">
-                <button 
-                    type="button"
-                    id="comprarFichabtn"
-                    class="btn btn-primary btn-lg btn-block">
-                    Comprar Ficha!
-                </button>
-            </div>
+            <form class="card p-2 mb-3">
+                <div class="input-group">
+                    
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="quantidadeFichas"
+                        placeholder="Quantidade de fichas"
+                    />
+
+                    <div class="input-group-append">
+                        <button 
+                            type="button"
+                            id="comprarFichaBtn"
+                            class="btn btn-secondary">
+                            Comprar Fichas!
+                        </button>
+                    </div>
+                </div>
+            </form>
 
             <div class="row">
                 <button 
                     type="button"
-                    id="startbtn"
-                    class="btn btn-secondary btn-lg btn-block"
+                    id="startBtn"
+                    class="btn btn-primary btn-lg btn-block"
                     onclick="iniciarJogo()">
-                    Jogar!
+                    JOGAR
                 </button>
             </div>
 
+            <div class="row">
+                <div class="col-md order-md mb-3"></div>
+                <button
+                    type="button"
+                    id="distribuirPremioBtn"
+                    class="btn btn-danger btn-lg btn-block mb-3">
+                    Distribuir Prêmio!
+                </button>
+
+                
+                <button
+                    type="button"
+                    id="sacarBtn"
+                    class="btn btn-danger btn-lg btn-block">
+                    Sacar!
+                </button>
+                </div>
+            </div>
+
+            <br/>
             <div class="row">
                 <h2 class="corTexto">
                     Regras

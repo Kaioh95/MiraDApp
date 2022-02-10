@@ -15,7 +15,7 @@ body{
 
 .painel{
     position: absolute;
-    width: 190px;
+    width: 100px;
     padding: 10px;
     left: 0px;
     bottom: 0px;
@@ -33,7 +33,7 @@ body{
     height: 20px;
 }
 
-.cronometro{
+.hits{
     float: left;
     font-size: 20px;
     font-weight: bold;
