@@ -1,3 +1,176 @@
+// ENDEREÇO EHTEREUM DO CONTRATO
+var contractAddress = "0x14334e23b7e6fc1c8a38fb5664bb9894c0b7531d";
+
+// Inicializa o objeto DApp
+document.addEventListener("DOMContentLoaded", onDocumentLoad);
+function onDocumentLoad() {
+  DApp.init();
+}
+
+// Nosso objeto DApp que irá armazenar a instância web3
+const DApp = {
+  web3: null,
+  contracts: {},
+  account: null,
+
+  init: function () {
+    return DApp.initWeb3();
+  },
+
+  // Inicializa o provedor web3
+  initWeb3: async function () {
+    if (typeof window.ethereum !== "undefined") {
+      try {
+        const accounts = await window.ethereum.request({ // Requisita primeiro acesso ao Metamask
+          method: "eth_requestAccounts",
+        });
+        DApp.account = accounts[0];
+        window.ethereum.on('accountsChanged', DApp.updateAccount); // Atualiza se o usuário trcar de conta no Metamaslk
+      } catch (error) {
+        console.error("Usuário negou acesso ao web3!");
+        return;
+      }
+      DApp.web3 = new Web3(window.ethereum);
+    } else {
+      console.error("Instalar MetaMask!");
+      return;
+    }
+    return DApp.initContract();
+  },
+
+  // Atualiza 'DApp.account' para a conta ativa no Metamask
+  updateAccount: async function() {
+    DApp.account = (await DApp.web3.eth.getAccounts())[0];
+    atualizaInterface();
+  },
+
+  // Associa ao endereço do seu contrato
+  initContract: async function () {
+    DApp.contracts.Mira = new DApp.web3.eth.Contract(abi, contractAddress);
+    return DApp.render();
+  },
+
+  // Inicializa a interface HTML com os dados obtidos
+  render: async function () {
+    inicializaInterface();
+  },
+};
+
+// *** MÉTODOS (de consulta - view) DO CONTRATO ** //
+
+function verQuantidadeTokens() {
+    return DApp.contracts.Mira.methods.verQuantidadeTokens().call({ from: DApp.account });
+}
+  
+function verScore() {
+    return DApp.contracts.Mira.methods.verScore().call({ from: DApp.account });
+}
+
+function verPremio() {
+    return DApp.contracts.Mira.methods.verPremio().call();
+}
+  
+function verPrecoToken() {
+    return DApp.contracts.Mira.methods.verPrecoToken().call();
+}
+
+function verificarPodeJogar() {
+    return DApp.contracts.Mira.methods.verificarPodeJogar().call({ from: DApp.account });
+}
+  
+function verTop1() {
+    return DApp.contracts.Mira.methods.verTop1().call();
+}
+
+function verTop2() {
+    return DApp.contracts.Mira.methods.verTop2().call();
+}
+
+function verTop3() {
+    return DApp.contracts.Mira.methods.verTop3().call();
+}
+  
+function isOwner() {
+    return DApp.contracts.Mira.methods.isOwner().call({ from: DApp.account });
+}
+
+
+// *** MÉTODOS (de escrita) DO CONTRATO ** //
+
+function comprarToken() {
+    let quant = document.getElementById("quantidadeFichas").value;
+    let preco = 100000000000000000 * quant;
+    return DApp.contracts.Mira.methods.comprarToken(quant).send({ from: DApp.account, value: preco }).then(atualizaInterface);;
+}
+  
+function distribuirPremio() {
+    return DApp.contracts.Mira.methods.distribuirPremio().send({ from: DApp.account }).then(atualizaInterface);;
+}
+
+function sacar() {
+    return DApp.contracts.Mira.methods.sacar().send({ from: DApp.account }).then(atualizaInterface);;
+}
+
+function registraScore() {
+    return DApp.contracts.Mira.methods.registraScore(hits).send({ from: DApp.account }).then(atualizaInterface);;
+}
+
+// *** ATUALIZAÇÃO DO HTML *** //
+
+function inicializaInterface() {
+    document.getElementById("comprarFichaBtn").onclick = comprarToken;
+    document.getElementById("distribuirPremioBtn").onclick = distribuirPremio;
+    document.getElementById("sacarBtn").onclick = sacar;
+    atualizaInterface();
+}
+
+function atualizaInterface() {
+    verQuantidadeTokens().then((result) => {
+        document.getElementById("total-fichas").innerHTML = result;
+    });
+
+    verScore().then((result) => {
+        document.getElementById("score").innerHTML = result;
+    });
+
+    verPremio().then((result) => {
+        document.getElementById("premios").innerHTML =
+            result / 1000000000000000000 + " ETH";
+    });
+
+    verPrecoToken().then((result) => {
+        document.getElementById("preco").innerHTML =
+            "Preço da Rifa: " + result / 1000000000000000000 + " ETH";
+    });
+
+    verTop1().then((result) => {
+        document.getElementById("enderecoTop1").innerHTML = result[0];
+    });
+
+    verTop2().then((result) => {
+        document.getElementById("enderecoTop1").innerHTML = result[0];
+    });
+
+    verTop3().then((result) => {
+        document.getElementById("enderecoTop1").innerHTML = result[0];
+    });
+
+    document.getElementById("endereco").innerHTML = DApp.account;
+
+    document.getElementById("distribuirPremioBtn").style.display = "none";
+    isOwner().then((result) => {
+        if (result) {
+            document.getElementById("distribuirPremioBtn").style.display = "block";
+        }
+    });
+
+    document.getElementById("sacarBtn").style.display = "none";
+    isOwner().then((result) => {
+        if (result) {
+            document.getElementById("sacarBtn").style.display = "block";
+        }
+    });
+}
 
 // *** Métodos relacionados ao jogo *** //
 var altura
@@ -26,6 +199,7 @@ function posicaoRandom(){
             alert("Game Over! Hits: " + hits)
             // chamar função para registrar score
             window.location.replace("index.html")
+            registraScore()
         }
         document.getElementById("heart" + hearts).src = "imagens/emptyHeart.png"
         hearts--
@@ -53,9 +227,12 @@ function posicaoRandom(){
     }
 
     document.body.appendChild(alvo)
-    //console.log(eixoX, eixoY, tamanho)
 }
 
 function iniciarJogo(){
-    window.location.replace("app.html")
+    if (verificarPodeJogar) {
+        window.location.replace("app.html")
+    } else {
+        alert("Quantidade de tokens insuficiente para jogar!")
+    }
 }
