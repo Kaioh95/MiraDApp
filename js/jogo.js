@@ -144,14 +144,17 @@ function atualizaInterface() {
     });
 
     verTop1().then((result) => {
-        document.getElementById("enderecoTop1").innerHTML = result[0];
+        document.getElementById("scoreTop1").innerHTML = result[0];
+        document.getElementById("enderecoTop1").innerHTML = result[1];
     });
 
     verTop2().then((result) => {
+        document.getElementById("scoreTop2").innerHTML = result[0];
         document.getElementById("enderecoTop2").innerHTML = result[0];
     });
 
     verTop3().then((result) => {
+        document.getElementById("scoreTop3").innerHTML = result[0];
         document.getElementById("enderecoTop3").innerHTML = result[0];
     });
 
@@ -199,12 +202,11 @@ function posicaoRandom(){
             alert("Game Over! Hits: " + hits)
             // chamar função para registrar score
             window.location.replace("index.html")
-            while(!document.getElementById("comprarFichaBtn")){
-                
-            }
-            registraScore().then((result) => {
-                inicializaInterface()
-            });
+            window.onload = function(){
+                registraScore().then((result) => {
+                    inicializaInterface()
+                });
+            };
         }
         document.getElementById("heart" + hearts).src = "imagens/emptyHeart.png"
         hearts--
