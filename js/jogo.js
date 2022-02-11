@@ -140,7 +140,7 @@ function atualizaInterface() {
 
     verPrecoToken().then((result) => {
         document.getElementById("preco").innerHTML =
-            "Preço da Rifa: " + result / 1000000000000000000 + " ETH";
+            "Preço da Ficha: " + result / 1000000000000000000 + " ETH";
     });
 
     verTop1().then((result) => {
@@ -148,11 +148,11 @@ function atualizaInterface() {
     });
 
     verTop2().then((result) => {
-        document.getElementById("enderecoTop1").innerHTML = result[0];
+        document.getElementById("enderecoTop2").innerHTML = result[0];
     });
 
     verTop3().then((result) => {
-        document.getElementById("enderecoTop1").innerHTML = result[0];
+        document.getElementById("enderecoTop3").innerHTML = result[0];
     });
 
     document.getElementById("endereco").innerHTML = DApp.account;
@@ -230,7 +230,7 @@ function posicaoRandom(){
 }
 
 function iniciarJogo(){
-    if (verificarPodeJogar) {
+    if (verificarPodeJogar()) {
         window.location.replace("app.html")
     } else {
         alert("Quantidade de tokens insuficiente para jogar!")
