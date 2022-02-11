@@ -182,19 +182,19 @@ function irTelaInicial(){
 }
 
 // *** Métodos relacionados ao jogo *** //
-var altura
-var largura
+//var altura
+//var largura
 var hearts = 3
 var hits = 0
 
-function ajustarTamanhoJanelaJogo() {
+/*function ajustarTamanhoJanelaJogo() {
     altura = window.innerHeight
     largura = window.innerWidth
 
     console.log(largura, altura)
 }
 
-ajustarTamanhoJanelaJogo()
+ajustarTamanhoJanelaJogo()*/
 
 function posicaoRandom(){
 
