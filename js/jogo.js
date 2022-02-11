@@ -112,7 +112,7 @@ function sacar() {
 }
 
 function registraScore(novoScore) {
-    return DApp.contracts.Mira.methods.registraScore(novoScore).send({ from: DApp.account }).then(atualizaInterface);;
+    return DApp.contracts.Mira.methods.registraScore(novoScore).send({ from: DApp.account }).then(irTelaInicial);;
 }
 
 // *** ATUALIZAÇÃO DO HTML *** //
@@ -177,6 +177,10 @@ function atualizaInterface() {
     });
 }
 
+function irTelaInicial(){
+    window.location.replace("index.html")
+}
+
 // *** Métodos relacionados ao jogo *** //
 var altura
 var largura
@@ -202,8 +206,7 @@ function posicaoRandom(){
         if(hearts < 1){
             clearInterval(respawnAlvo)
             alert("Game Over! Hits: " + hits)
-            window.location.replace("index.html")
-            
+
             // chamar função para registrar score
             registraScore(novoScore)
         }
