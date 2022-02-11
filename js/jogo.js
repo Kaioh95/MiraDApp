@@ -200,7 +200,7 @@ function posicaoRandom(){
             // chamar função para registrar score
             window.location.replace("index.html")
             registraScore().then((result) => {
-                atualizaInterface()
+                inicializaInterface()
             });
         }
         document.getElementById("heart" + hearts).src = "imagens/emptyHeart.png"
