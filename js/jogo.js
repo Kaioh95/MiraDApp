@@ -199,6 +199,9 @@ function posicaoRandom(){
             alert("Game Over! Hits: " + hits)
             // chamar função para registrar score
             window.location.replace("index.html")
+            while(document.getElementById("comprarFichaBtn") === "undefined"){
+                
+            }
             registraScore().then((result) => {
                 inicializaInterface()
             });
