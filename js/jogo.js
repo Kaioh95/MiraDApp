@@ -111,8 +111,8 @@ function sacar() {
     return DApp.contracts.Mira.methods.sacar().send({ from: DApp.account }).then(atualizaInterface);;
 }
 
-function registraScore() {
-    return DApp.contracts.Mira.methods.registraScore(hits).send({ from: DApp.account }).then(gameOver);;
+function registraScore(novoScore) {
+    return DApp.contracts.Mira.methods.registraScore(novoScore).send({ from: DApp.account }).then(atualizaInterface);;
 }
 
 // *** ATUALIZAÇÃO DO HTML *** //
@@ -192,10 +192,6 @@ function ajustarTamanhoJanelaJogo() {
 
 ajustarTamanhoJanelaJogo()
 
-function gameOver(){
-    alert("Game Over! Hits: " + hits)
-}
-
 function posicaoRandom(){
 
     // remover alvo anterior caso exista
@@ -205,12 +201,11 @@ function posicaoRandom(){
         // Game Over
         if(hearts < 1){
             clearInterval(respawnAlvo)
-            // chamar função para registrar score
-            registraScore().then((result) => {
-                gameOver()
-            });
-
+            alert("Game Over! Hits: " + hits)
             window.location.replace("index.html")
+            
+            // chamar função para registrar score
+            registraScore(novoScore)
         }
         document.getElementById("heart" + hearts).src = "imagens/emptyHeart.png"
         hearts--
