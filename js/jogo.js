@@ -186,10 +186,11 @@ var altura
 var largura
 var hearts = 3
 var hits = 0
+var contagem = 3
 
 function ajustarTamanhoJanelaJogo() {
-    altura = window.innerHeight
-    largura = window.innerWidth
+    altura = 480
+    largura = 720
 
     console.log(largura, altura)
 }
@@ -197,6 +198,8 @@ function ajustarTamanhoJanelaJogo() {
 ajustarTamanhoJanelaJogo()
 
 function posicaoRandom(){
+
+    var areaJogo = document.getElementById("area-jogo")
 
     // remover alvo anterior caso exista
     if(document.getElementById('alvoReal')){
@@ -225,7 +228,7 @@ function posicaoRandom(){
     alvo.className = "alvo"
     alvo.style.left = eixoX + "px"
     alvo.style.top = eixoY + "px"
-    alvo.style.position = "absolute"
+    alvo.style.position = "relative"
     alvo.style.width = tamanho + "px"
     alvo.style.height = tamanho + "px"
     alvo.id = "alvoReal"
@@ -236,7 +239,7 @@ function posicaoRandom(){
         this.remove()
     }
 
-    document.body.appendChild(alvo)
+    areaJogo.appendChild(alvo)
 }
 
 function iniciarJogo(){
@@ -258,3 +261,4 @@ function mensagemRegistraScore(){
     mensagem.className = "corTexto d-flex justify-content-center"
     bodyDoJogo.appendChild(mensagem)
 }
+
