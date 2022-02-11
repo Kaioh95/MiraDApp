@@ -208,7 +208,7 @@ function posicaoRandom(){
             alert("Game Over! Hits: " + hits)
 
             // chamar função para registrar score
-            registraScore(novoScore)
+            registraScore(hits)
         }
         document.getElementById("heart" + hearts).src = "imagens/emptyHeart.png"
         hearts--
