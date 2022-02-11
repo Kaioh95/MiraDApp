@@ -201,12 +201,11 @@ function posicaoRandom(){
         // Game Over
         if(hearts < 1){
             clearInterval(respawnAlvo)
-            alert("Game Over! Hits: " + hits)
             // chamar função para registrar score
+            registraScore().then((result) => {});
+            
+            alert("Game Over! Hits: " + hits)
             window.location.replace("index.html")
-            registraScore().then((result) => {
-                inicializaInterface()
-            });
         }
         document.getElementById("heart" + hearts).src = "imagens/emptyHeart.png"
         hearts--
