@@ -210,7 +210,6 @@ function posicaoRandom(){
 
             // chamar função para registrar score
             registraScore(hits)
-            window.location.replace("index.html")
         }
         document.getElementById("heart" + hearts).src = "imagens/emptyHeart.png"
         hearts--
