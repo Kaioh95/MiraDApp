@@ -152,12 +152,12 @@ function atualizaInterface() {
 
     verTop2().then((result) => {
         document.getElementById("scoreTop2").innerHTML = result[0];
-        document.getElementById("enderecoTop2").innerHTML = result[0];
+        document.getElementById("enderecoTop2").innerHTML = result[1];
     });
 
     verTop3().then((result) => {
         document.getElementById("scoreTop3").innerHTML = result[0];
-        document.getElementById("enderecoTop3").innerHTML = result[0];
+        document.getElementById("enderecoTop3").innerHTML = result[1];
     });
 
     document.getElementById("endereco").innerHTML = DApp.account;
@@ -206,9 +206,11 @@ function posicaoRandom(){
         if(hearts < 1){
             clearInterval(respawnAlvo)
             alert("Game Over! Hits: " + hits)
+            mensagemRegistraScore()
 
             // chamar função para registrar score
             registraScore(hits)
+            window.location.replace("index.html")
         }
         document.getElementById("heart" + hearts).src = "imagens/emptyHeart.png"
         hearts--
@@ -248,4 +250,12 @@ function iniciarJogo(){
             alert("Quantidade de tokens insuficiente para jogar!")
         }
     });
+}
+
+function mensagemRegistraScore(){
+    let bodyDoJogo = document.getElementById("telaInteiraJogo")
+    let mensagem = document.createElement("div")
+    mensagem.innerHTML = "Resgistrando Score..."
+    mensagem.className = "corTexto d-flex justify-content-center"
+    bodyDoJogo.appendChild(mensagem)
 }
