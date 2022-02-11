@@ -4,9 +4,6 @@ html{
 
 body{
     background: rgba(50,50,50,255);
-    width: 400px;
-    height: 400px;
-    position: absolute;
 }
 
 .alvo {
