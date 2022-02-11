@@ -118,10 +118,12 @@ function registraScore() {
 // *** ATUALIZAÇÃO DO HTML *** //
 
 function inicializaInterface() {
-    document.getElementById("comprarFichaBtn").onclick = comprarToken;
-    document.getElementById("distribuirPremioBtn").onclick = distribuirPremio;
-    document.getElementById("sacarBtn").onclick = sacar;
-    atualizaInterface();
+    if(document.getElementById('comprarFichaBtn')){
+        document.getElementById("comprarFichaBtn").onclick = comprarToken;
+        document.getElementById("distribuirPremioBtn").onclick = distribuirPremio;
+        document.getElementById("sacarBtn").onclick = sacar;
+        atualizaInterface();
+    }
 }
 
 function atualizaInterface() {
@@ -202,11 +204,9 @@ function posicaoRandom(){
             alert("Game Over! Hits: " + hits)
             // chamar função para registrar score
             window.location.replace("index.html")
-            window.onload = function(){
-                registraScore().then((result) => {
-                    inicializaInterface()
-                });
-            };
+            registraScore().then((result) => {
+                inicializaInterface()
+            });
         }
         document.getElementById("heart" + hearts).src = "imagens/emptyHeart.png"
         hearts--
