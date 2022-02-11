@@ -199,7 +199,9 @@ function posicaoRandom(){
             alert("Game Over! Hits: " + hits)
             // chamar função para registrar score
             window.location.replace("index.html")
-            registraScore()
+            registraScore().then((result) => {
+                atualizaInterface()
+            });
         }
         document.getElementById("heart" + hearts).src = "imagens/emptyHeart.png"
         hearts--
@@ -230,9 +232,13 @@ function posicaoRandom(){
 }
 
 function iniciarJogo(){
-    if (verificarPodeJogar()) {
-        window.location.replace("app.html")
-    } else {
-        alert("Quantidade de tokens insuficiente para jogar!")
-    }
+
+    verificarPodeJogar().then((result) => {
+        if(result){
+            window.location.replace("app.html")
+        }
+        else{
+            alert("Quantidade de tokens insuficiente para jogar!")
+        }
+    });
 }
