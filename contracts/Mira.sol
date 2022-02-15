@@ -74,7 +74,7 @@ contract Mira {
             top3Scores[1] = top3Scores[0];
             top3Scores[0] = score;
             emit NovoScore(1, msg.sender);
-        } else if(score > scores[top3[1]]){
+        } else if(score > top3Scores[top3[1]]){
             
             top3[2] = top3[1];  //top3 = top2
             top3[1] = msg.sender;    // top2 = new score
@@ -82,13 +82,15 @@ contract Mira {
             top3Scores[2] = top3Scores[1];
             top3Scores[1] = score;
             emit NovoScore(2, msg.sender);
-        } else if(score > scores[top3[2]]){
+        } else if(score > top3Scores[top3[2]]){
             
             top3[2] = msg.sender;    //top3 = new score
 
             top3Scores[2] = score;
             emit NovoScore(3, msg.sender);
-        } 
+        } else {
+            emit NovoScore(0, msg.sender);
+        }
     }
 
     function verQuantidadeTokens() public view returns(uint){
