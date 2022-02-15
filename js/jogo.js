@@ -1,5 +1,5 @@
 // ENDEREÇO EHTEREUM DO CONTRATO
-var contractAddress = "0x8d9555C8dDb727EaC4c40571C232BD90F02d88FC";
+var contractAddress = "0x8d9555c8ddb727eac4c40571c232bd90f02d88fc";
 
 // Inicializa o objeto DApp
 document.addEventListener("DOMContentLoaded", onDocumentLoad);
